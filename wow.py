@@ -1,5 +1,5 @@
-from lib.wowuitest import HelloWorld
+from lib.wowui import WOWUI
 
 if __name__ == "__main__":
-    app = HelloWorld()
+    app = WOWUI()
     app.run()
