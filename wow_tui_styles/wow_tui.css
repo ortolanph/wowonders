@@ -1,0 +1,14 @@
+Screen {
+    layout: grid;
+    grid-size: 3;
+}
+
+#stages_pane {
+    row-span: 3;
+    border: green;
+    height: 100%;
+}
+
+.lists {
+    padding: 1;
+}
