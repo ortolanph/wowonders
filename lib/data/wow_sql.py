@@ -17,3 +17,14 @@ INSERT_ANSWER = "INSERT INTO WOW_ANSWER (wow_answer) values (?)"
 
 # -------------------------- LEVEL X ANSWERS --------------------------
 LINK_ANSWER_TO_LEVEL = "INSERT INTO wow_answer_level (wow_level_id, wow_answer_id) VALUES (?, ?)"
+
+# QUERIES
+ALL_STAGES = "SELECT id, wow_country, wow_landmark FROM wow_stage WHERE processed = 1 ORDER BY id;"
+LEVEL_BY_STAGE_ID = "SELECT id, wow_level, wow_letters FROM wow_level WHERE wow_stage_id = ? ORDER BY id;"
+ANSWERS_BY_LEVEL_ID = """
+    select a.wow_answer
+      from wow_answer_level al
+           inner join main.wow_answer a on a.id = al.wow_answer_id
+           inner join main.wow_level l on al.wow_level_id = l.id
+     where l.wow_level = ?;
+"""

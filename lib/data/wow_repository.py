@@ -1,8 +1,8 @@
 """ Database module. """
 import logging
 
-from lib.wow_connection_manager import ConnectionManager
-from lib.wow_sql import *
+from lib.data.wow_connection_manager import ConnectionManager
+from lib.data.wow_sql import *
 
 
 class WOWRepository:
@@ -123,3 +123,34 @@ class WOWRepository:
         cursor.execute(LINK_ANSWER_TO_LEVEL, (level_id, answer_id))
 
         self._connection.commit()
+
+    def get_stages(self):
+        logging.info(f"Fetching stage data")
+        cursor = self._connection.execute(ALL_STAGES)
+
+        stage_data = {}
+        rows = cursor.fetchall()
+
+        for row in rows:
+            key = f"{row[1]} - {row[2]}"
+            stage_data[key] = row[0]
+
+        return stage_data
+
+    def get_levels(self, stage_id):
+        logging.info(f"Fetching stage levels from stage {stage_id}")
+        cursor = self._connection.execute(LEVEL_BY_STAGE_ID, (stage_id,))
+
+        level_data = {}
+        rows = cursor.fetchall()
+
+        for row in rows:
+            key = f"{row[1]} - ({row[2]})"
+            level_data[key] = row[0]
+
+        return level_data
+
+    def get_answers(self, level_id):
+        logging.info(f"Fetching level answers from level {level_id}")
+        cursor = self._connection.execute(ANSWERS_BY_LEVEL_ID, (level_id,))
+        return list(map(lambda row: row[0], cursor.fetchall()))

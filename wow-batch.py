@@ -1,6 +1,6 @@
 import logging
 
-from lib.wow_controller import WOWController
+from lib.service.wow_service import WOWService
 
 logging.basicConfig(
     format='%(asctime)s :: %(levelname)s :: %(funcName)s :: %(lineno)d :: %(message)s',
@@ -8,6 +8,6 @@ logging.basicConfig(
 
 if __name__ == '__main__':
     logging.info("Starting the main code")
-    controller = WOWController()
+    controller = WOWService()
 
     controller.retrieve_data()

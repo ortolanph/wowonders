@@ -1,4 +1,4 @@
 beautifulsoup4
 requests
 uuid
-textual[dev]
+pysimplegui-4-foss == 4.60.4.1

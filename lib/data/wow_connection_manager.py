@@ -2,7 +2,7 @@
 import logging
 import sqlite3
 
-from lib.wow_constants import DATABASE_FILE
+from lib.constants.wow_constants import DATABASE_FILE
 
 
 class ConnectionManager:

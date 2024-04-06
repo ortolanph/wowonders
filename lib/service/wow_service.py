@@ -1,10 +1,10 @@
 import logging
 
-from lib.wow_crawler import Crawler
-from lib.wow_repository import WOWRepository
+from lib.crawler.wow_crawler import Crawler
+from lib.data.wow_repository import WOWRepository
 
 
-class WOWController:
+class WOWService:
     _crawler = None
     _repository = None
 
@@ -50,3 +50,15 @@ class WOWController:
                         self._repository.link_level_to_answer(level_id, answer_id)
 
                 self._repository.mark_as_processed(stage_id)
+
+    def load_stage_data(self):
+        logging.info("Fetching stage data")
+        return self._repository.get_stages()
+
+    def load_levels(self, stage_id):
+        logging.info(f"Fetching levels from stage {stage_id}")
+        return self._repository.get_levels(stage_id)
+
+    def load_answers(self, level_id):
+        logging.info(f"Fetching answers for level {level_id}")
+        return self._repository.get_answers(level_id)

@@ -1,10 +1,11 @@
 import logging
 import re
+
 import requests
 from bs4 import BeautifulSoup
 
-from lib.wow_constants import BASE_URL
-from lib.wow_info import WOWStage, WOWLevel
+from lib.constants.wow_constants import BASE_URL
+from lib.crawler.wow_info import WOWStage, WOWLevel
 
 
 class Crawler:
