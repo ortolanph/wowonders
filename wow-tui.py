@@ -1,5 +1,5 @@
-from lib.tui.wowtui import MyTUIApp
+from lib.tui.wowtui import WOWTUIApp
 
 if __name__ == "__main__":
-    app = MyTUIApp()
+    app = WOWTUIApp()
     app.run()

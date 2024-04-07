@@ -3,9 +3,18 @@ Screen {
     grid-size: 3;
 }
 
-#stages_pane {
-    row-span: 3;
-    border: green;
+#stages_panel {
+    border: blue;
+    height: 100%;
+}
+
+#levels_panel {
+    border: blue;
+    height: 100%;
+}
+
+#answers_panel {
+    border: blue;
     height: 100%;
 }
 
