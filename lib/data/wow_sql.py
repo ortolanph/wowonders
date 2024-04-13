@@ -28,3 +28,25 @@ ANSWERS_BY_LEVEL_ID = """
            inner join main.wow_level l on al.wow_level_id = l.id
      where l.wow_level = ?;
 """
+LEVEL_BY_LEVEL_ID = """
+select l.wow_level, l.wow_letters, s.id, s.wow_country, s.wow_landmark
+  from wow_level l inner join main.wow_stage s on s.id = l.wow_stage_id
+ where l.wow_level = ?;
+"""
+
+# select *
+#   from wow_stage
+#  where wow_country like '%England%';
+#
+# select *
+#   from wow_stage
+#  where wow_landmark like '%Big Ben%';
+#
+# select *
+#   from wow_stage
+#  where wow_landmark like '%blue%'
+#     or wow_country like '%blue%';
+#
+# select *
+#   from wow_level
+#  where wow_letters like '%STARS%';

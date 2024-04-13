@@ -62,3 +62,7 @@ class WOWService:
     def load_answers(self, level_id):
         logging.info(f"Fetching answers for level {level_id}")
         return self._repository.get_answers(level_id)
+
+    def load_level_data(self, level_id):
+        logging.info(f"Fetching level data for level {level_id}")
+        return self._repository.get_level_data(level_id)

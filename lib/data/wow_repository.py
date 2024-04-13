@@ -154,3 +154,21 @@ class WOWRepository:
         logging.info(f"Fetching level answers from level {level_id}")
         cursor = self._connection.execute(ANSWERS_BY_LEVEL_ID, (level_id,))
         return list(map(lambda row: row[0], cursor.fetchall()))
+
+    def get_level_data(self, level_id):
+        logging.info(f"Fetching level information from level {level_id}")
+        cursor = self._connection.execute(LEVEL_BY_LEVEL_ID, (level_id, ))
+
+        record = cursor.fetchone()
+
+        return {
+            "level_info": {
+                "level_id": record[0],
+                "level_letters": record[1]
+            },
+            "stage_info": {
+                "stage_id": record[2],
+                "stage_country": record[3],
+                "stage_landmark": record[4]
+            }
+        }
