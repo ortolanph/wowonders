@@ -6,26 +6,29 @@ from lib.rest import wow_bp
 from lib.service.wow_service import WOWService
 
 
+# TODO: Implement this method
 @headers(
     headerDict={
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     })
 @wow_bp.route("/wow/v1/stages/<country>", methods=["GET"])
-def get_stage_by_country(country: str):
+def get_stages_by_country(country: str):
     raise NotImplementedError("get_stage_by_country is not implemented")
 
 
+# TODO: Implement this method
 @headers(
     headerDict={
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     })
 @wow_bp.route("/wow/v1/stages/<landmark>", methods=["GET"])
-def get_stage_by_landmark(landmark: str):
+def get_stages_by_landmark(landmark: str):
     raise NotImplementedError("get_stage_by_landmark is not implemented")
 
 
+# TODO: Implement this method
 @headers(
     headerDict={
         'Access-Control-Allow-Origin': '*',
@@ -36,13 +39,14 @@ def search_stage(expr: str):
     raise NotImplementedError("search_stage is not implemented")
 
 
+# TODO: Implement this method
 @headers(
     headerDict={
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     })
 @wow_bp.route("/wow/v1/level/<words>", methods=["GET"])
-def search_level_by_words(words: str):
+def search_levels_by_words(words: str):
     raise NotImplementedError("search_level_by_words is not implemented")
 
 
