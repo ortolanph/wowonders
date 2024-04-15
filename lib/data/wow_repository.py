@@ -157,7 +157,7 @@ class WOWRepository:
 
     def get_level_data(self, level_id):
         logging.info(f"Fetching level information from level {level_id}")
-        cursor = self._connection.execute(LEVEL_BY_LEVEL_ID, (level_id, ))
+        cursor = self._connection.execute(LEVEL_BY_LEVEL_ID, (level_id,))
 
         record = cursor.fetchone()
 
