@@ -1,13 +1,4 @@
-# TODO: Implement this interaction
+from lib.cli import wow_cli_app
 
-# Queries
-# Find answers by level id
-# get_stages_by_country
-# get_stages_by_landmark
-# search_stage
-# search_levels_by_words
-
-# Utils
-# Export to JSON
-# Export a level to PDF
-# Export all levels to PDF
+if __name__ == '__main__':
+    wow_cli_app.app()
