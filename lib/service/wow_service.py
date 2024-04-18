@@ -66,3 +66,31 @@ class WOWService:
     def load_level_data(self, level_id):
         logging.info(f"Fetching level data for level {level_id}")
         return self._repository.get_level_data(level_id)
+
+    def get_stages_by_country(self, country):
+        logging.info(f"Fetching stages by Country {country}")
+        stages = self._repository.get_stages_by_country(country)
+        stages_ids = list(map(lambda stage: stage[0], stages))
+        level_infos = self._repository.get_levels_by_stages(stages_ids)
+        level_info_resources = list(
+            map(
+                lambda level_info: {"stage_id": level_info[0], "level_resource": f"/wow/v1/answers/{level_info[1]}"},
+                level_infos
+            )
+        )
+        
+        formatted_data = list(
+            map(
+                lambda stage: {
+                    "id": stage[0],
+                    "country": stage[1],
+                    "landmark": stage[2],
+                    "levels": [
+                        level_info["level_resource"]
+                        for level_info in level_info_resources
+                        if level_info["stage_id"] == stage[0]
+                    ]}, stages
+            )
+        )
+
+        return formatted_data

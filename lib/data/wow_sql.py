@@ -33,10 +33,18 @@ select l.wow_level, l.wow_letters, s.id, s.wow_country, s.wow_landmark
   from wow_level l inner join main.wow_stage s on s.id = l.wow_stage_id
  where l.wow_level = ?;
 """
-
-# select *
-#   from wow_stage
-#  where wow_country like '%England%';
+STAGE_BY_COUNTRY_LIKE = """
+select id, wow_country, wow_landmark
+  from wow_stage
+ where wow_country like ?
+ order by id;
+"""
+LEVEL_ID_BY_COUNTRY_IDS = """
+select s.id, l.id
+  from wow_stage s
+         inner join main.wow_level l on s.id = l.wow_stage_id
+ where s.id in (%s)
+"""
 #
 # select *
 #   from wow_stage

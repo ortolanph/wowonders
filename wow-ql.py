@@ -5,14 +5,7 @@ if __name__ == '__main__':
     { 
         levelAnswers(levelId: 3333) { 
             levelInfo { 
-                levelId
-                levelLetters
                 answers
-            }
-            stageInfo {
-                stageId
-                stageCountry
-                stageLandmark
             }
         } 
     }

@@ -172,3 +172,15 @@ class WOWRepository:
                 "stage_landmark": record[4]
             }
         }
+
+    def get_stages_by_country(self, country: str):
+        logging.info(f"Fetching stages by Country {country}")
+        like_country = f'%{country}%'
+        cursor = self._connection.execute(STAGE_BY_COUNTRY_LIKE, (like_country,))
+        return cursor.fetchall()
+
+    def get_levels_by_stages(self, stages: [int]):
+        logging.info(f"Fetching levels ids for {stages}")
+        QUERY = LEVEL_ID_BY_COUNTRY_IDS % ",".join("?"*len(stages))
+        cursor = self._connection.execute(QUERY, stages)
+        return cursor.fetchall()

@@ -7,7 +7,6 @@ app = typer.Typer(rich_markup_mode="rich")
 
 
 # Queries
-# Find answers by level id
 # get_stages_by_country
 # get_stages_by_landmark
 # search_stage
