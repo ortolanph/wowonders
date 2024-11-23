@@ -10,7 +10,7 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-appName = "Activation Service Mock in Python"
+appName = "WOW Answers API"
 
 app = Flask(appName)
 CORS(app, support_credentials=True, origins="http://localhost:4200")

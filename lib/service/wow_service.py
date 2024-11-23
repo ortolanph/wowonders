@@ -94,3 +94,13 @@ class WOWService:
         )
 
         return formatted_data
+
+    def load_interval_levels(self, from_level_id, to_level_id):
+        levels = []
+        for level in range(int(from_level_id), int(to_level_id) + 1):
+            level_info = self.load_level_data(level)
+            level_info["level_info"]["answers"] = self.load_answers(level)
+            level_info["level_info"]["answers_string"] = ", ".join(level_info["level_info"]["answers"])
+            levels.append(level_info)
+
+        return levels

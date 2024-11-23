@@ -47,7 +47,7 @@ class WOWRepository:
         self._connection.commit()
 
     def is_stage_processed(self, country, landmark):
-        logging.info(f"Is {country}/{landmark} stage already processed")
+        logging.info(f"Is {country}/{landmark} stage already processed?")
         cursor = self._connection.execute(IS_STAGE_PROCESSED, (country, landmark))
 
         wow_stage_processed = cursor.fetchone()

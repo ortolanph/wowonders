@@ -8,6 +8,6 @@ logging.basicConfig(
 
 if __name__ == '__main__':
     logging.info("Starting the main code")
-    controller = WOWService()
+    service = WOWService()
 
-    controller.retrieve_data()
+    service.retrieve_data()
