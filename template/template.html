@@ -5,40 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Butterfly Hunt</title>
     <style>
+        @page {
+            size: A5;
+            margin: 1cm;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            font-size: 11pt;
+            line-height: 1.4;
+            counter-reset: page-counter;
         }
-        .stage-info {
-            font-weight: bold;
-        }
-        .answers {
-            font-family: "Courier New", Courier, monospace;
-            white-space: pre-wrap;
+
+        h1 {
+            text-align: center;
+            margin: 15px 0;
+            page-break-after: avoid;
         }
 
         .pair-container {
-            page-break-inside: avoid; /* Prevent this container from breaking across pages */
-            margin-bottom: 20px; /* Add space between pairs */
+            page-break-inside: avoid;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .info-row {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .info-card {
+            display: table-cell;
+            padding: 0 5px;
+            border-left: 1px solid #ddd;
+        }
+
+        .info-card:first-child {
+            border-left: none;
+        }
+
+        .info-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-value {
+            font-size: 16pt;
+            font-weight: bold;
+            text-align: left;
+            padding-right: 5px;
+            line-height: 1.2;
+        }
+
+        .info-label {
+            font-size: 10pt;
+            color: #555;
+            text-transform: uppercase;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .answers {
+            font-family: "Courier New", Courier, monospace;
+            white-space: pre-wrap;
+            font-size: 18pt;
+            padding: 5px;
+            border: 1px solid #333;
+            background-color: #fff;
+            border-radius: 5px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        .completion-box {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            background-color: white;
+        }
+
+        .page-counter {
+            position: fixed;
+            bottom: 0.5cm;
+            width: 100%;
+            text-align: center;
+            font-size: 10pt;
+        }
+
+        .page-counter::after {
+            content: counter(page-total);
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                color: black;
+            }
+
+            .pair-container {
+                break-inside: avoid;
+                border: 2px solid #333;
+                margin-bottom: 15px;
+            }
+
+            .info-row {
+                border: 1px solid #333;
+                background-color: #f8f8f8;
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            .info-card {
+                display: table-cell;
+            }
+
+            .answers {
+                border: 1px solid #333;
+                background-color: white;
+            }
+
+            .completion-box {
+                border: 2px solid #000;
+            }
+
+            @page {
+                @bottom-center {
+                    content: "Page " counter(page) " of " counter(pages);
+                }
+            }
         }
     </style>
 </head>
 <body>
 <h1>Butterfly Hunt</h1>
-<hr/>
+
 {% for level in levels %}
 <section class="pair-container">
-    <div class="stage-info">
-        Stage ID: {{level.stage_info.stage_id}} | Level ID: {{level.level_info.level_id}} | Level Letters:
-        {{level.level_info.level_letters}} | Country: {{level.stage_info.stage_country}} | Landmark:
-        {{level.stage_info.stage_landmark}}
+    <!-- Completion checkbox -->
+    <div class="completion-box"></div>
+
+    <!-- First row - Country and Landmark -->
+    <div class="info-row">
+        <div class="info-card">
+            <div class="info-content">
+                <div class="info-value">{{level.stage_info.stage_country}}</div>
+                <div class="info-label">country</div>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <div class="info-value">{{level.stage_info.stage_landmark}}</div>
+                <div class="info-label">landmark</div>
+            </div>
+        </div>
     </div>
-    <!-- Answers Line -->
-    <div class="answers">
-        {{level.level_info.answers_string}}
+
+    <!-- Second row - Stage ID, Level ID, Level Letters -->
+    <div class="info-row">
+        <div class="info-card">
+            <div class="info-content">
+                <div class="info-value">{{level.stage_info.stage_id}}</div>
+                <div class="info-label">stage id</div>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <div class="info-value">{{level.level_info.level_id}}</div>
+                <div class="info-label">level id</div>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-content">
+                <div class="info-value">{{level.level_info.level_letters}}</div>
+                <div class="info-label">level letters</div>
+            </div>
+        </div>
     </div>
+
+    <div class="answers">{{level.level_info.answers_string}}</div>
 </section>
-<hr/>
 {% endfor %}
+
+<!-- For PDF viewers that support JavaScript -->
+<script>
+    // Count total pages for the page counter
+    window.onload = function() {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @page {
+                @bottom-center {
+                    content: "Page " counter(page) " of ${document.querySelectorAll('.pair-container').length}";
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+</script>
 </body>
 </html>

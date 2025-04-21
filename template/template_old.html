@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Hunt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .stage-info {
+            font-weight: bold;
+            font-size: 16pt
+        }
+        .answers {
+            font-family: "Courier New", Courier, monospace;
+            white-space: pre-wrap;
+            font-size: 16pt
+        }
+
+        .pair-container {
+            page-break-inside: avoid; /* Prevent this container from breaking across pages */
+            margin-bottom: 20px; /* Add space between pairs */
+        }
+    </style>
+</head>
+<body>
+<h1>Butterfly Hunt</h1>
+<hr/>
+{% for level in levels %}
+<section class="pair-container">
+    <div class="stage-info">
+        Stage ID: {{level.stage_info.stage_id}} | Level ID: {{level.level_info.level_id}} | Level Letters:
+        {{level.level_info.level_letters}} | Country: {{level.stage_info.stage_country}} | Landmark:
+        {{level.stage_info.stage_landmark}}
+    </div>
+    <!-- Answers Line -->
+    <div class="answers">
+        {{level.level_info.answers_string}}
+    </div>
+</section>
+<hr/>
+{% endfor %}
+</body>
+</html>
